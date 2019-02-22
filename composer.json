@@ -1,0 +1,33 @@
+{
+    "name": "lucidtunes/jaak-php",
+    "description": "Porting of jaak.js",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matteo Benetti",
+            "email": "matteo@lucidtunes.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Lucid\\Jaak\\Utils\\":  "src/Utils/",
+            "Lucid\\Jaak\\Playback\\":  "src/Playback/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lucid\\Jaak\\Test\\":  "test/"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "ext-json": "*",
+        "web-token/jwt-framework": "^1.3",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
+}
