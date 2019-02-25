@@ -1,18 +1,23 @@
 {
-    "name": "lucidtunes/jaak-php",
+    "name": "lucidtunes/jaak",
     "description": "Porting of jaak.js",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Matteo Benetti",
+            "name": "Matteo Benetti (Corporate)",
             "email": "matteo@lucidtunes.com"
+        },
+        {
+            "name": "Matteo Benetti",
+            "email": "mathew.benetti@gmail.com",
+            "homepage": "https://github.com/fernetmatt"
         }
     ],
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Lucid\\Jaak\\":  "src/",
+            "Lucid\\Jaak\\":  "src/"
         }
     },
     "autoload-dev": {
