@@ -1,7 +1,7 @@
 <?php
-namespace Lucid\Jaak;
+namespace LucidTunes\Jaak;
 
-use Lucid\Jaak\GraphQL\Query;
+use LucidTunes\Jaak\GraphQL\Query;
 
 class Application
 {

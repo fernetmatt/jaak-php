@@ -1,5 +1,5 @@
 <?php
-namespace Lucid\Jaak;
+namespace LucidTunes\Jaak;
 
 use Jose\Component\Core\AlgorithmManager;
 use Jose\Component\Core\Converter\StandardConverter;

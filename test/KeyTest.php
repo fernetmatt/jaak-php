@@ -1,9 +1,9 @@
 <?php
 
-namespace Lucid\Jaak\Test;
+namespace LucidTunes\Jaak\Test;
 
-use Lucid\Jaak\Key;
-use Lucid\Jaak\Validators;
+use LucidTunes\Jaak\Key;
+use LucidTunes\Jaak\Validators;
 use PHPUnit\Framework\TestCase;
 
 class KeyTest extends TestCase

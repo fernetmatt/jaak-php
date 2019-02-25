@@ -1,8 +1,8 @@
 <?php
 
-namespace Lucid\Jaak\Test;
+namespace LucidTunes\Jaak\Test;
 
-use Lucid\Jaak\Device;
+use LucidTunes\Jaak\Device;
 use PHPUnit\Framework\TestCase;
 
 class DeviceTest extends TestCase

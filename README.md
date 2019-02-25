@@ -1,6 +1,7 @@
 # jaak-php
 
 ##### A simple port of jaak.js made with love by Lucid Tunes
+##### This Project is under active development
 
 ### Introduction
 This PHP library is intended to work within jaak.js frontend interface.
@@ -13,6 +14,12 @@ clients a rich experience such: albums grouping and classification,
 statistics, new releases etc. etc., unloading the client from this
 "supply-chain" work. In this way you can off-load some code from
 your clients implementation, keeping the central logic in your backend.
+
+### Intallation
+
+```
+composer require lucidtunes/jaak
+```
 
 
 ### Device Registration
@@ -87,4 +94,10 @@ $tracks = $application->listTracks();
 foreach ($tracks as $track) {
     echo 'Track title: ' . $track->data()->title;
 }
+```
+
+### Testing
+
+```
+vendor/phpunit/phpunit/phpunit --bootstrap vendor/autoload.php test/
 ```

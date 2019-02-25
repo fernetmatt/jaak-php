@@ -1,5 +1,5 @@
 <?php
-namespace Lucid\Jaak;
+namespace LucidTunes\Jaak;
 
 class Response
 {

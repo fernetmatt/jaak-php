@@ -1,6 +1,6 @@
 <?php
 
-namespace Lucid\Jaak\GraphQL;
+namespace LucidTunes\Jaak\GraphQL;
 
 class Query
 {

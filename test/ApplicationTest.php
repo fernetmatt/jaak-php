@@ -1,10 +1,10 @@
 <?php
 
-namespace Lucid\Jaak\Test;
+namespace LucidTunes\Jaak\Test;
 
-use Lucid\Jaak\Application;
-use Lucid\Jaak\Device;
-use Lucid\Jaak\Key;
+use LucidTunes\Jaak\Application;
+use LucidTunes\Jaak\Device;
+use LucidTunes\Jaak\Key;
 use PHPUnit\Framework\TestCase;
 
 class ApplicationTest extends TestCase
