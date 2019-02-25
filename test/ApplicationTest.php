@@ -2,10 +2,9 @@
 
 namespace Lucid\Jaak\Test;
 
-use Lucid\Jaak\Playback\Application;
-
-use Lucid\Jaak\Playback\Device;
-use Lucid\Jaak\Utils\Key;
+use Lucid\Jaak\Application;
+use Lucid\Jaak\Device;
+use Lucid\Jaak\Key;
 use PHPUnit\Framework\TestCase;
 
 class ApplicationTest extends TestCase
@@ -40,22 +39,23 @@ class ApplicationTest extends TestCase
 
     public function testGenerate()
     {
-        $key = Key::fromJWK(self::testAppKeyJsonString);
-        $this->assertInstanceOf(Application::class, Application::generate($key));
+        $key = Key::createFromJWK(self::testAppKeyJsonString);
+        $application = Application::create($key);
+        $this->assertInstanceOf(Application::class, $application);
 
         $this->expectException(\TypeError::class);
-        Application::generate(null);
+        Application::create(null);
 
         $this->expectException(\InvalidArgumentException::class);
-        Application::generate($key, [ 'uri' => 'fail://thi-uri-will-fail@@@com']);
+        Application::create($key, [ 'uri' => 'fail://this-uri-will-fail@@@com']);
     }
 
 
     public function testRegisterDevice()
     {
-        $key = Key::fromJWK(self::testAppKeyJsonString);
+        $key = Key::createFromJWK(self::testAppKeyJsonString);
+        $app = Application::create($key);
         $device = Device::createFromJson(self::testDeviceJsonString);
-        $app = Application::generate($key);
         $device->setConsumerId('my-system-user-id');
 
         try {
@@ -69,4 +69,33 @@ class ApplicationTest extends TestCase
         $this->assertNotEmpty($device->getCreatedAt());
         $this->assertInstanceOf(\DateTime::class, $device->getCreatedAt());
     }
+
+    public function testRegisterNewDevice()
+    {
+        $devKey = Key::create();
+        $device = Device::createWithNameAndKey('exnovo', $devKey);
+
+        $app = Application::create(Key::createFromJWK(self::testAppKeyJsonString));
+
+        try {
+            $device = $app->registerDevice($device);
+        } catch (\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        $this->assertInstanceOf(Device::class, $device);
+        $this->assertNotEmpty($device->getId());
+        $this->assertIsString($device->getId());
+        $this->assertNotEmpty($device->getCreatedAt());
+        $this->assertInstanceOf(\DateTime::class, $device->getCreatedAt());
+    }
+
+    public function testListTracks()
+    {
+        $application = Application::create(Key::createFromJWK(self::testAppKeyJsonString));
+        $tracks = $application->listTracks();
+        $this->assertIsArray($tracks);
+    }
+
+
 }

@@ -12,8 +12,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Lucid\\Jaak\\Utils\\":  "src/Utils/",
-            "Lucid\\Jaak\\Playback\\":  "src/Playback/"
+            "Lucid\\Jaak\\":  "src/",
         }
     },
     "autoload-dev": {

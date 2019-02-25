@@ -2,8 +2,8 @@
 
 namespace Lucid\Jaak\Test;
 
-use Lucid\Jaak\Utils\Key;
-use Lucid\Jaak\Utils\Validators;
+use Lucid\Jaak\Key;
+use Lucid\Jaak\Validators;
 use PHPUnit\Framework\TestCase;
 
 class KeyTest extends TestCase
@@ -22,7 +22,7 @@ class KeyTest extends TestCase
 
     public function test__construct()
     {
-        $key = Key::generate();
+        $key = Key::create();
         $valid = Validators::isValidKey($key);
         $this->assertTrue($valid);
     }
@@ -30,13 +30,13 @@ class KeyTest extends TestCase
 
     public function testGetId()
     {
-        $key = Key::fromJWK(self::testJwkJsonString);
+        $key = Key::createFromJWK(self::testJwkJsonString);
         $this->assertEquals("MXiegyEH_lrrexWCx9_rfXlG2qrgyMHG5tJ2_EJYDIU", $key->getId());
     }
 
     public function testIsPrivate()
     {
-        $key = Key::fromJWK(self::testJwkJsonString);
+        $key = Key::createFromJWK(self::testJwkJsonString);
         $this->assertTrue($key->isPrivate(), true);
     }
 
@@ -44,25 +44,19 @@ class KeyTest extends TestCase
     {
         $values = json_decode(self::testJwkJsonString, true);
         unset($values['d']);
-        $key = Key::fromJWKArray($values);
+        $key = Key::createFromJWKArray($values);
         $this->assertTrue($key->isPublic() && !$key->isPrivate(), true);
     }
 
     public function testGetPublicKey()
     {
-        $key = Key::fromJWK(self::testJwkJsonString);
+        $key = Key::createFromJWK(self::testJwkJsonString);
         self::assertFalse($key->getPublicKey()->has('d'));
     }
 
     public function testSign()
     {
-        $key = Key::generate();
-
-        $payload = '{
-            deviceID: 1,
-            licenseID: 2,
-            nonce: 3,
-          }';
+        $key = Key::create();
 
         $payload = [
             'deviceId' => 1,
@@ -80,13 +74,13 @@ class KeyTest extends TestCase
 
     public function testFromJWK()
     {
-        $key = Key::fromJWK(self::testJwkJsonString);
+        $key = Key::createFromJWK(self::testJwkJsonString);
         $this->assertInstanceOf(Key::class, $key);
     }
 
     public function testGenerate()
     {
-        $key = Key::generate();
+        $key = Key::create();
         $this->assertEquals($key->toJWK()->get('kty'), 'EC');
         $this->assertEquals($key->toJWK()->get('crv'), Key::CURVE);
         $this->assertArrayHasKey('sign', array_flip($key->toJWK()->get('key_ops')));

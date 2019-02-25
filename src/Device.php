@@ -1,8 +1,5 @@
 <?php
-namespace Lucid\Jaak\Playback;
-
-use Lucid\Jaak\Utils\Key;
-use Lucid\Jaak\Utils\Validators;
+namespace Lucid\Jaak;
 
 class Device implements \JsonSerializable
 {
@@ -19,7 +16,7 @@ class Device implements \JsonSerializable
     protected $consumerId;
 
     /**
-     * Library JWK Wrapper
+     * Library JWK Wrapper (wrapping a DeviceKey)
      * @var Key
      */
     protected $key;
@@ -58,15 +55,17 @@ class Device implements \JsonSerializable
         }
 
         Validators::isValidDeviceDataset($deviceJson);
-        $key = Key::fromJWKArray($deviceJson['key']);
+
+        $key = Key::createFromJWKArray($deviceJson['key']);
         Validators::isValidKey($key);
-        $device = Device::buildWithNameAndKey($deviceJson['name'], $key);
+
+        $device = Device::createWithNameAndKey($deviceJson['name'], $key);
         Validators::isValidDevice($device);
 
         return $device;
     }
 
-    public static function buildWithNameAndKey(string $name, Key $key)
+    public static function createWithNameAndKey(string $name, Key $key)
     {
         $device = new self();
         $device->setname($name);

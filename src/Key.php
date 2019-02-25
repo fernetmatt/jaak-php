@@ -1,5 +1,5 @@
 <?php
-namespace Lucid\Jaak\Utils;
+namespace Lucid\Jaak;
 
 use Jose\Component\Core\AlgorithmManager;
 use Jose\Component\Core\Converter\StandardConverter;
@@ -26,7 +26,7 @@ class Key
      *
      * @return Key
      */
-    public static function generate()
+    public static function create()
     {
         $key = JWKFactory::createECKey(self::CURVE, [
             "key_ops" => [
@@ -44,7 +44,7 @@ class Key
      * @param string $json
      * @return Key
      */
-    public static function fromJWK(string $json = "{}")
+    public static function createFromJWK(string $json = "{}")
     {
         $key = JWK::createFromJson($json);
         return new self($key);
@@ -56,7 +56,7 @@ class Key
      * @param array $values
      * @return Key
      */
-    public static function fromJWKArray(array $values = [])
+    public static function createFromJWKArray(array $values = [])
     {
         $key = JWK::create($values);
         return new self($key);
@@ -179,32 +179,5 @@ class Key
         } catch (\Exception $e) {
             return false;
         }
-    }
-
-    /**
-     * Compute SHA256 hash - this is a simple helper method
-     *
-     * @param $data
-     * @return string
-     */
-    public static function sha256($data)
-    {
-        return hash('sha256', $data);
-    }
-
-    /**
-     * Eat in a JWK key and strip out unnecessary data
-     *
-     * @param JWK $jwk
-     * @return array
-     */
-    public static function normalise(JWK $jwk)
-    {
-        return [
-            'crv' => $jwk->get('crv'),
-            'kty' => $jwk->get('kty'),
-            'x' => $jwk->get('x'),
-            'y' => $jwk->get('y'),
-        ];
     }
 }

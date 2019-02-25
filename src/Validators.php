@@ -1,7 +1,6 @@
 <?php
-namespace Lucid\Jaak\Utils;
+namespace Lucid\Jaak;
 
-use Lucid\Jaak\Playback\Device;
 use Jose\Component\Core\JWK;
 
 class Validators

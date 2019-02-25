@@ -2,7 +2,7 @@
 
 namespace Lucid\Jaak\Test;
 
-use Lucid\Jaak\Playback\Device;
+use Lucid\Jaak\Device;
 use PHPUnit\Framework\TestCase;
 
 class DeviceTest extends TestCase
