@@ -1,6 +1,7 @@
 {
     "name": "lucidtunes/jaak",
     "description": "Porting of jaak.js",
+    "homepage": "https://github.com/lucidtunes/jaak-php",
     "type": "library",
     "license": "MIT",
     "authors": [
