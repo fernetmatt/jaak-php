@@ -1,6 +1,7 @@
 <?php
 namespace LucidTunes\Jaak;
 
+use LucidTunes\Jaak\GraphQL\Mutation;
 use LucidTunes\Jaak\GraphQL\Query;
 
 class Application
@@ -86,19 +87,8 @@ class Application
     {
         Validators::isValidDevice($device);
         $response = $this->request([
-            'query' =>
-                'mutation RegisterDevice($input: RegisterDeviceInput!) {
-                    registerDevice(input: $input) {
-                      alreadyRegistered
-                      device {
-                        id
-                        createdAt
-                      }
-                    }
-                  }',
-            'variables' => [
-                'input' => $device
-            ]
+            'query' => Mutation::RegisterDevice,
+            'variables' => [ 'input' => $device ]
         ]);
 
         if (isset($response->data()->registerDevice->device->id) &&
