@@ -1,0 +1,11 @@
+{
+  "crv": "P-256",
+  "d": "12345-replaceme",
+  "ext": true,
+  "key_ops": [
+    "sign"
+  ],
+  "kty": "EC",
+  "x": "12345-replaceme",
+  "y": "12345-replaceme"
+}

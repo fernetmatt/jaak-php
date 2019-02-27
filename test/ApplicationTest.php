@@ -9,37 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 class ApplicationTest extends TestCase
 {
-    const testAppKeyJsonString = '
-        {
-            "crv": "P-256",
-            "d": "ozNy7ssoATV32v4JhhUdJ7pcGKa1hLf4D7w3QtWH1Ow",
-            "ext": true,
-            "key_ops": [
-                "sign"
-            ],
-            "kty": "EC",
-            "x": "y24CuLgK-DvroU_wX6QiCTqV6Z8v2Z-sBvBuDYb9ZXU",
-            "y": "d4LMbtBEoGzAShrSXgpbNAm3h6REXGwLnnkHRXeIKdk"
-        }';
-
-    const testDeviceJsonString = '
-        {
-            "name": "matte",
-            "key": {
-                "crv": "P-256",
-                "ext": true,
-                "key_ops": [
-                  "verify"
-                ],
-                "kty": "EC",
-                "x": "nz37CYUQYPjLDOkC8OMlepEn1e_EOI3YXC6vJfAGK0s",
-                "y": "Dp-BrQ2dZyl1whFJZl7b-QTipEcLW-_hQWRoiatg1TQ"
-            }
-        }';
-
     public function testGenerate()
     {
-        $key = Key::createFromJWK(self::testAppKeyJsonString);
+        $key = Key::createFromJWK(testAppKeyJsonString);
         $application = Application::create($key);
         $this->assertInstanceOf(Application::class, $application);
 
@@ -53,9 +25,9 @@ class ApplicationTest extends TestCase
 
     public function testRegisterDevice()
     {
-        $key = Key::createFromJWK(self::testAppKeyJsonString);
+        $key = Key::createFromJWK(testAppKeyJsonString);
         $app = Application::create($key);
-        $device = Device::createFromJson(self::testDeviceJsonString);
+        $device = Device::createFromJson(testDeviceJsonString);
         $device->setConsumerId('my-system-user-id');
 
         try {
@@ -75,7 +47,7 @@ class ApplicationTest extends TestCase
         $devKey = Key::create();
         $device = Device::createWithNameAndKey('exnovo', $devKey);
 
-        $app = Application::create(Key::createFromJWK(self::testAppKeyJsonString));
+        $app = Application::create(Key::createFromJWK(testAppKeyJsonString));
 
         try {
             $device = $app->registerDevice($device);
@@ -92,7 +64,7 @@ class ApplicationTest extends TestCase
 
     public function testListTracks()
     {
-        $application = Application::create(Key::createFromJWK(self::testAppKeyJsonString));
+        $application = Application::create(Key::createFromJWK(testAppKeyJsonString));
         $tracks = $application->listTracks();
         $this->assertIsArray($tracks);
     }

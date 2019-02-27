@@ -25,7 +25,8 @@
     "autoload-dev": {
         "psr-4": {
             "LucidTunes\\Jaak\\Test\\":  "test/"
-        }
+        },
+        "files": ["test/_configure.php"]
     },
     "require": {
         "php": ">=7.1",

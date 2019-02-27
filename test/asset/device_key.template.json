@@ -1,0 +1,13 @@
+{
+  "name": "my-device-name",
+  "key": {
+    "crv": "P-256",
+    "ext": true,
+    "key_ops": [
+      "verify"
+    ],
+    "kty": "EC",
+    "x": "12345-replaceme",
+    "y": "12345-replaceme"
+  }
+}
