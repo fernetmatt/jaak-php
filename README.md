@@ -98,6 +98,8 @@ foreach ($tracks as $track) {
 
 ### Testing
 
+Generate an Application Key and a Device Key. Put bare json inside *test/asset/[app_key.json, device_key.json]* and run
+
 ```
-vendor/phpunit/phpunit/phpunit --bootstrap vendor/autoload.php test/
+vendor/phpunit/phpunit/phpunit --bootstrap vendor/autoload.php --testdox test/
 ```
