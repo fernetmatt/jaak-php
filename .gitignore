@@ -1,3 +1,5 @@
 vendor
 .idea
 .phpunit.result.cache
+test/asset/app_key.json
+test/asset/device_key.json
