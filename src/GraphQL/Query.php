@@ -13,6 +13,13 @@ class Query
                                   licenseID
                                   title
                                   artist
+                                  release {
+                                    id
+                                    type
+                                    title
+                                    artist
+                                    releaseDate
+                                  }
                                   releaseDate
                                   duration
                                   genres {
