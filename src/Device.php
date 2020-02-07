@@ -55,7 +55,6 @@ class Device implements \JsonSerializable
         }
 
         Validators::isValidDeviceDataset($deviceJson);
-
         $key = Key::createFromJWKArray($deviceJson['key']);
         Validators::isValidKey($key);
 

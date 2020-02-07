@@ -2,12 +2,15 @@
 namespace LucidTunes\Jaak;
 
 use Jose\Component\Core\AlgorithmManager;
+
 use Jose\Component\Core\Converter\StandardConverter;
+use Jose\Component\Core\AlgorithmManagerFactory;
 use Jose\Component\Core\JWK;
 use Jose\Component\KeyManagement\JWKFactory;
 use Jose\Component\Signature\Algorithm\ES256;
 use Jose\Component\Signature\JWS;
 use Jose\Component\Signature\JWSBuilder;
+use Jose\Component\Signature\JWSBuilderFactory;
 use Jose\Component\Signature\JWSVerifier;
 use Jose\Component\Signature\Serializer\CompactSerializer;
 use Jose\Component\Signature\Serializer\JWSSerializerManager;
@@ -58,7 +61,7 @@ class Key
      */
     public static function createFromJWKArray(array $values = [])
     {
-        $key = JWK::create($values);
+        $key = new JWK($values);
         return new self($key);
     }
 
@@ -143,8 +146,10 @@ class Key
      */
     public function sign($payload, $getJWS = false)
     {
-        $algorithmManager = AlgorithmManager::create([ new ES256() ]);
-        $jwsBuilder = new JWSBuilder(new StandardConverter(), $algorithmManager);
+        $algorithmManagerFactory = new AlgorithmManagerFactory();
+        $algorithmManagerFactory->add('ES256', new ES256());
+        $jwsBuilderFactory = new JWSBuilderFactory($algorithmManagerFactory);
+        $jwsBuilder = $jwsBuilderFactory->create(['ES256']);
 
         $jws = $jwsBuilder
                     ->create()
@@ -156,7 +161,7 @@ class Key
             return $jws;
         }
 
-        $serializer = new CompactSerializer(new StandardConverter());
+        $serializer = new CompactSerializer();
         return $serializer->serialize($jws, 0);
     }
 
@@ -169,8 +174,10 @@ class Key
      */
     public static function verifySignature(string $token, Key $key)
     {
-        $serializerManager = JWSSerializerManager::create([new CompactSerializer(new StandardConverter())]);
-        $algorithmManager = AlgorithmManager::create([ new ES256() ]);
+        $algorithmManagerFactory = new AlgorithmManagerFactory();
+        $algorithmManagerFactory->add('ES256', new ES256());
+        $serializerManager = new JWSSerializerManager([new CompactSerializer()]);
+        $algorithmManager = $algorithmManagerFactory->create(['ES256']);
         $jwsVerifier = new JWSVerifier($algorithmManager);
 
         try {
