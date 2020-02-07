@@ -1,5 +1,9 @@
 # jaak-php
 
+### !! UPDATE 6 Feb. 2020
+Due to "JAAK Music" being inactive, development of this library is suspended
+until further notice.
+
 ##### A simple port of jaak.js made with love by Lucid Tunes
 ##### This Project is under active development
 
